@@ -1,0 +1,109 @@
+\mode<presentation>
+
+\RequirePackage{etoolbox} 
+\RequirePackage{tikz}
+
+\defbeamertemplate*{frametitle}{htlpi}{%
+    \ifnum\value{framenumber}>0%
+        \vspace{-1pt}%
+        \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,rightskip=0.5cm,sep=0.2cm,ignorebg]{slidetitle}%
+            \vbox{}\vskip20pt%
+            \strut\insertframetitle\strut%
+            \vbox{}\vskip-20pt%
+        \end{beamercolorbox}%
+    \fi%
+}
+
+\defbeamertemplate{frametitle}{plain}{%
+    \ifnum\value{framenumber}>0%
+        \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,rightskip=0.5cm,sep=0.2cm,ignorebg]{slidetitle}%
+            \vbox{}\vskip5pt%
+            \strut\insertframetitle\strut%
+        \end{beamercolorbox}%
+    \fi%
+}
+
+\defbeamertemplate{frametitle}{part}{
+    \ifnum\value{framenumber}>0%
+        \begin{minipage}[b][0.9\paperheight]{\textwidth}
+        \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,rightskip=0.5cm,sep=0.2cm,ignorebg]{slidetitle}%
+            \usebeamerfont*{subtitle}%
+            \insertframesubtitle\par%
+            \usebeamerfont*{title}%
+            \insertframetitle\par%
+        \end{beamercolorbox}%
+        \end{minipage}
+    \fi%
+}
+
+\defbeamertemplate*{background canvas}{htlpi}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node at (current page.center){%
+        \includegraphics[width=\paperwidth,page=2]{backgrounds.pdf}};
+        \node at ([shift = {(-0.025\paperheight, 0.025\paperheight)}] current page.south east) { 
+        \color{white}\usebeamerfont*{footline}\insertframenumber};
+    \end{tikzpicture}%
+}
+
+\defbeamertemplate{background canvas}{htlpiplain}{%
+}
+
+\defbeamertemplate{background canvas}{htlpiempty}{%
+}
+
+\defbeamertemplate{background canvas}{focusframe}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node at (current page.center){%
+        \includegraphics[width=\paperwidth,page=2]{backgrounds.pdf}};
+    \end{tikzpicture}%
+}
+
+\BeforeBeginEnvironment{frame}{%
+    \setbeamertemplate{background canvas}[htlpi]%
+    \setbeamertemplate{frametitle}[htlpi]%
+    \advance\textheight by-7pt%
+}
+
+\define@key{beamerframe}{plain}[true]{%
+    \setbeamertemplate{background canvas}[htlpiplain]%
+    \setbeamertemplate{frametitle}[plain]%
+    %
+    \setbeamertemplate{footline}[none]%
+}
+
+\define@key{beamerframe}{empty}[true]{%
+    \setbeamertemplate{background canvas}[htlpiempty]%
+    \setbeamertemplate{frametitle}[plain]%
+    %
+    \setbeamertemplate{footline}[none]%
+}
+
+\define@key{beamerframe}{part}[true]{%
+    \setbeamertemplate{frametitle}[part]%
+    \setbeamertemplate{footline}[none]%
+}
+
+
+% vertical centering
+\define@key{beamerframe}{c}[true]{%
+    \beamer@frametopskip=0pt plus 1fill\relax%
+    \beamer@framebottomskip=0pt plus 1fill\relax%
+    \beamer@frametopskipautobreak=0pt plus 0.4\paperheight\relax%
+    \beamer@framebottomskipautobreak=0pt plus 0.6\paperheight\relax%
+    \def\beamer@initfirstlineunskip{}%
+}
+
+\define@key{beamerframe}{focus}[true]{%
+    \begingroup%
+        \setkeys{beamerframe}{noframenumbering}%
+        \setbeamertemplate{background canvas}[focusframe]%
+        \setbeamertemplate{frametitle}[plain]%
+        %
+        \setkeys{beamerframe}{c}%
+        \centering%
+        \usebeamerfont{focusframe}%
+        \usebeamercolor[fg]{frametitle}%
+}
+
+
+\mode<all>

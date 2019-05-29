@@ -1,0 +1,77 @@
+\mode<presentation>
+
+\RequirePackage{tikz}
+
+\makeatletter
+
+\setbeamertemplate{blocks}[default]
+
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[square]
+
+\setbeamertemplate{itemize items}[square]
+\setbeamertemplate{itemize subitem}{--}
+\setbeamertemplate{itemize subsubitem}[circle]
+
+\defbeamertemplate*{title page}{htlpi}{%
+    {%
+       	\usebeamercolor{frametitle}\colorlet{htlpi@@temp}{bg}%
+	    \begin{tikzpicture}[remember picture,overlay]
+	        \draw[fill=white] (current page.north west) rectangle (current page.south east);
+            \node at (current page.center){%
+            \includegraphics[width=\paperwidth,page=1]{backgrounds.pdf}};
+        \end{tikzpicture}%
+    }
+    
+    % Set the title graphic in a zero-height box, so that
+    % the position of other elements is not affected.
+    {\vfuzz=9999pt\vbox to 0pt {
+        \vspace*{0.5cm}
+        \centering
+        \inserttitlegraphic
+    }}
+    
+    \vspace{0.5cm}
+    {
+        \centering
+        
+        \vspace{\baselineskip}
+        { 
+            \usebeamerfont*{title}%
+            \usebeamercolor[fg]{frametitle}%
+            \inserttitle\par
+        }
+
+        \ifx\inserttitle\empty\else{
+            \usebeamerfont*{subtitle}
+            \vspace{0.5\baselineskip}
+            \usebeamercolor[fg]{frametitle}
+            \insertsubtitle \par
+        }\fi
+
+        \ifx\beamer@shortauthor\empty\else{%
+            \usebeamerfont*{author}%
+            \vspace{0.8\baselineskip}%
+            \insertauthor\par%
+        }\fi%
+
+        \ifx\insertinstitute\empty\else{
+            \usebeamerfont*{institute}
+            \vspace*{0.5\baselineskip}
+            \insertinstitute
+        }\fi
+
+        \ifx\insertdate\empty\else{
+            \usebeamerfont*{date}%
+            \vspace*{0.5\baselineskip}%
+            \insertdate \par%
+        }\fi%
+    }
+   	\vspace*{0pt plus 100fill}
+    
+    \addtocounter{framenumber}{-1}
+}
+
+\makeatother
+
+\mode<all>
