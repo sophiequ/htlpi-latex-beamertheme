@@ -10,7 +10,11 @@ This template can be used via [overleaf.com](overleaf.com).
 
 [Example.pdf](Example.pdf)
 
-<img src="./Example.png" width="300">
+<img src="./Example 1.png" width="300">
+<img src="./Example 2.png" width="300">
+<img src="./Example 3.png" width="300">
+<img src="./Example 4.png" width="300">
+<img src="./Example 5.png" width="300">
 
 
 ## License
